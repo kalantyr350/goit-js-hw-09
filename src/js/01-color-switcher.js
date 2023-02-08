@@ -17,7 +17,7 @@ function startColorSwitch() {
   btnStart.disabled = true;
   console.log(timerId);
 }
-
+console.log(btnStart);
 function stopColorSwitch() {
   clearInterval(timerId);
   bodyBG.style.backgroundColor = '#fff';

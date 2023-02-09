@@ -9,7 +9,6 @@ const inputHour = document.querySelector('[data-hours]');
 const inputMinute = document.querySelector('[data-minutes]');
 const inputSeconds = document.querySelector('[data-seconds]');
 const inputEl = document.querySelector('input');
-// const date = new Date();
 
 let timerCountdown = 0;
 let timerMs = null;
@@ -29,19 +28,18 @@ const options = {
       return;
     } else {
       startBtn.disabled = false;
-      // timerCountdown = selectedDates.getTime();
 
       startBtn.addEventListener('click', () => {
         timerId = setInterval(() => {
           timerCountdown = new Date(inputEl.value);
           timerMs = timerCountdown - Date.now();
           timerMs = timerMs - 1000;
-          // convertMs(timerMs);
-          // console.log(convertMs(timerMs)); // {days: 0, hours: 0, minutes: 0, seconds: 2}
+          if (timerMs.seconds === 0) {
+            clearInterval(timerId);
+          }
           const convertMsTimerMs = convertMs(timerMs);
           console.log(convertMsTimerMs);
           addLeadingZero(convertMsTimerMs);
-          // console.log(addLeadingZero(convertMs(timerMs))); // {days: 0, hours: 0, minutes: 0, seconds: 2}
         }, 1000);
         startBtn.disabled = true;
       });
@@ -77,8 +75,7 @@ function timerParamToString(value) {
 
 function addLeadingZero(value) {
   timerParamToString(value);
-  // const timerParam = Object.values(value);
-  // const timerParamToString = timerParam.map(timerParam => timerParam.toString().padStart(2, '0'));
+
   const { days, hours, minutes, seconds } = value;
   inputDays.innerHTML = days;
   inputHour.innerHTML = hours;

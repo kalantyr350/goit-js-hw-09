@@ -34,10 +34,12 @@ const options = {
           timerCountdown = new Date(inputEl.value);
           timerMs = timerCountdown - Date.now();
           timerMs = timerMs - 1000;
-          if (timerMs.seconds === 0) {
+          const convertMsTimerMs = convertMs(timerMs);
+
+          if (convertMsTimerMs.seconds <= 0) {
+            console.log(`зупинка цикла`);
             clearInterval(timerId);
           }
-          const convertMsTimerMs = convertMs(timerMs);
           console.log(convertMsTimerMs);
           addLeadingZero(convertMsTimerMs);
         }, 1000);
